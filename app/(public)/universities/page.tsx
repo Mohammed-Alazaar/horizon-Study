@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Apply to leading private universities across Turkey with Horizon Group's expert admission guidance.",
 };
 
+const PER_PAGE = 20;
+
 const fallback = [
   { name: "OSTİM Technical University", shortName: "OSTİM Teknik", slug: "ostim-teknik", coverColor: "linear-gradient(135deg,#0D2B55,#1A5FB4)", tags: ["Engineering", "Technology", "Bachelor's"], city: "Ankara", about: "A technology-focused university in the heart of Ankara's industrial district." },
   { name: "Lokman Hekim University", shortName: "Lokman Hekim", slug: "lokman-hekim", coverColor: "linear-gradient(135deg,#0F4C2A,#1A7A45)", tags: ["Medicine", "Health Sciences", "Bachelor's"], city: "Ankara", about: "A leading health sciences university offering medical and pharmacy programs." },
@@ -27,10 +29,18 @@ async function getUniversities() {
   }
 }
 
+function buildHref(page: number, city: string) {
+  const params = new URLSearchParams();
+  if (city !== "All") params.set("city", city);
+  if (page > 1) params.set("page", String(page));
+  const qs = params.toString();
+  return `/universities${qs ? `?${qs}` : ""}`;
+}
+
 export default async function UniversitiesPage({
   searchParams,
 }: {
-  searchParams: { city?: string };
+  searchParams: { city?: string; page?: string };
 }) {
   const universities = await getUniversities();
 
@@ -39,10 +49,29 @@ export default async function UniversitiesPage({
   ).sort() as string[];
 
   const activeCity = searchParams.city ?? "All";
+  const currentPage = Math.max(1, parseInt(searchParams.page ?? "1", 10));
+
   const filtered =
     activeCity === "All"
       ? universities
       : universities.filter((u: any) => u.city === activeCity);
+
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const safePage = Math.min(currentPage, Math.max(totalPages, 1));
+  const paginated = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
+
+  // Build a compact page number list: always show first, last, current ±1, with ellipsis
+  function pageNumbers(): (number | "…")[] {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const set = new Set([1, totalPages, safePage - 1, safePage, safePage + 1].filter((n) => n >= 1 && n <= totalPages));
+    const sorted = Array.from(set).sort((a, b) => a - b);
+    const result: (number | "…")[] = [];
+    for (let i = 0; i < sorted.length; i++) {
+      if (i > 0 && sorted[i] - sorted[i - 1] > 1) result.push("…");
+      result.push(sorted[i]);
+    }
+    return result;
+  }
 
   return (
     <>
@@ -65,7 +94,7 @@ export default async function UniversitiesPage({
               {["All", ...cities].map((city) => (
                 <Link
                   key={city}
-                  href={city === "All" ? "/universities" : `/universities?city=${encodeURIComponent(city)}`}
+                  href={buildHref(1, city)}
                   className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                     activeCity === city
                       ? "bg-navy-dark text-white border-navy-dark"
@@ -78,8 +107,15 @@ export default async function UniversitiesPage({
             </div>
           )}
 
+          {/* Results count */}
+          {filtered.length > 0 && (
+            <p className="text-sm text-gray-horizon-500 mb-6">
+              Showing {(safePage - 1) * PER_PAGE + 1}–{Math.min(safePage * PER_PAGE, filtered.length)} of {filtered.length} universities
+            </p>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((uni: any) => (
+            {paginated.map((uni: any) => (
               <Link
                 key={uni.slug}
                 href={`/universities/${uni.slug}`}
@@ -117,6 +153,56 @@ export default async function UniversitiesPage({
           {filtered.length === 0 && (
             <div className="text-center py-20 text-gray-horizon-400">No universities found in {activeCity}.</div>
           )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-1.5 mt-14 flex-wrap">
+              {/* Prev */}
+              <Link
+                href={buildHref(safePage - 1, activeCity)}
+                aria-disabled={safePage === 1}
+                className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                  safePage === 1
+                    ? "pointer-events-none opacity-30 border-gray-horizon-100 text-gray-horizon-400"
+                    : "border-gray-horizon-200 text-gray-horizon-700 hover:border-navy-dark hover:text-navy-dark bg-white"
+                }`}
+              >
+                ← Prev
+              </Link>
+
+              {pageNumbers().map((item, i) =>
+                item === "…" ? (
+                  <span key={`ellipsis-${i}`} className="px-2 text-gray-horizon-400 text-sm select-none">…</span>
+                ) : (
+                  <Link
+                    key={item}
+                    href={buildHref(item, activeCity)}
+                    className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium border transition-colors ${
+                      item === safePage
+                        ? "bg-navy-dark text-white border-navy-dark"
+                        : "bg-white text-gray-horizon-700 border-gray-horizon-200 hover:border-navy-dark hover:text-navy-dark"
+                    }`}
+                  >
+                    {item}
+                  </Link>
+                )
+              )}
+
+              {/* Next */}
+              <Link
+                href={buildHref(safePage + 1, activeCity)}
+                aria-disabled={safePage === totalPages}
+                className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                  safePage === totalPages
+                    ? "pointer-events-none opacity-30 border-gray-horizon-100 text-gray-horizon-400"
+                    : "border-gray-horizon-200 text-gray-horizon-700 hover:border-navy-dark hover:text-navy-dark bg-white"
+                }`}
+              >
+                Next →
+              </Link>
+            </div>
+          )}
+
         </div>
       </section>
 
