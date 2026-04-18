@@ -29,10 +29,10 @@ export default async function UniversitiesSection() {
         <div>
           <div className="text-xs font-medium tracking-[2px] uppercase text-blue mb-3">Partner Universities</div>
           <h2 className="font-display text-[clamp(28px,3vw,40px)] font-bold text-navy-dark leading-tight mb-3.5">
-            Ankara Universities
+            Universities Across Turkey
           </h2>
           <p className="text-base text-gray-horizon-500 max-w-[560px] leading-[1.7]">
-            We help you apply to leading private universities in Ankara with special offers and discounts.
+            We help you apply to leading private universities across Turkey with special offers and discounts.
           </p>
         </div>
         <Link href="/universities" className="bg-gold text-navy-dark px-[30px] py-3.5 rounded-lg text-[15px] font-medium whitespace-nowrap border-2 border-gold hover:bg-gold-light transition-colors">
@@ -75,14 +75,6 @@ export default async function UniversitiesSection() {
           </Link>
         ))}
 
-        {/* placeholder card */}
-        <div className="border-2 border-dashed border-gray-horizon-300 rounded-2xl flex items-center justify-center text-center p-8 bg-off-white">
-          <div>
-            <div className="text-[30px] mb-2.5">🎓</div>
-            <div className="text-[15px] font-medium text-navy mb-1.5">More Universities</div>
-            <div className="text-[13px] text-gray-horizon-500">Contact us for the full list of partner universities</div>
-          </div>
-        </div>
       </div>
     </section>
   );
