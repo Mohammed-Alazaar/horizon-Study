@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon Group – Study & Document Services in Ankara</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D2B55;
+    --navy-dark: #071829;
+    --blue: #1A5FB4;
+    --blue-light: #3A82D8;
+    --gold: #F0A500;
+    --gold-light: #FBBF24;
+    --white: #FFFFFF;
+    --off-white: #F7F8FC;
+    --gray-100: #EEF0F5;
+    --gray-300: #C5CAD8;
+    --gray-500: #7A819A;
+    --gray-700: #3C4160;
+    --text: #0D1B2E;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(7, 24, 41, 0.97);
+    backdrop-filter: blur(10px);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-dark);
+  }
+
+  .nav-logo-text {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .nav-logo-sub {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--gray-300);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy-dark) !important;
+    padding: 9px 22px;
+    border-radius: 6px;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy-dark) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, #1A3D6E 100%);
+    display: flex;
+    align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,95,180,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240,165,0,0.12);
+    border: 1px solid rgba(240,165,0,0.3);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid var(--gold);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 36px;
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* hero right cards */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    backdrop-filter: blur(6px);
+    transition: all 0.3s;
+  }
+
+  .hero-card:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(240,165,0,0.3);
+    transform: translateX(6px);
+  }
+
+  .hero-card-icon {
+    width: 48px; height: 48px;
+    background: rgba(240,165,0,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+  }
+
+  .hero-card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .hero-card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700;
+    color: var(--navy-dark);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--gray-500);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section {
+    background: var(--off-white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 30px;
+    border: 1px solid var(--gray-100);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card:hover {
+    box-shadow: 0 20px 60px rgba(13,27,46,0.1);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 56px; height: 56px;
+    background: rgba(26,95,180,0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 22px;
+  }
+
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy-dark);
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--gray-500);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .service-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .service-link:hover { gap: 10px; }
+
+  /* ─── UNIVERSITIES ─── */
+  .universities-section {
+    background: var(--white);
+  }
+
+  .uni-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .uni-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .uni-card {
+    border: 1px solid var(--gray-100);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+    background: var(--white);
+  }
+
+  .uni-card:hover {
+    box-shadow: 0 12px 40px rgba(13,27,46,0.1);
+    transform: translateY(-3px);
+    border-color: var(--blue-light);
+  }
+
+  .uni-card-img {
+    height: 160px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: -2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .uni-card-img span {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .uni-card-img::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .uni-card-body {
+    padding: 20px 22px;
+  }
+
+  .uni-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--navy-dark);
+    margin-bottom: 6px;
+  }
+
+  .uni-location {
+    font-size: 13px;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .uni-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .uni-tag {
+    font-size: 11px;
+    font-weight: 500;
+    background: rgba(26,95,180,0.08);
+    color: var(--blue);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── WHY US ─── */
+  .why-section {
+    background: var(--navy-dark);
+    color: var(--white);
+  }
+
+  .why-section .section-label { color: var(--gold-light); }
+  .why-section .section-title { color: var(--white); }
+  .why-section .section-sub { color: rgba(255,255,255,0.55); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: all 0.3s;
+  }
+
+  .why-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(240,165,0,0.2);
+  }
+
+  .why-num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .why-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .why-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+  }
+
+  /* ─── BLOG ─── */
+  .blog-section { background: var(--off-white); }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .blog-card {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--gray-100);
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .blog-card:hover {
+    box-shadow: 0 12px 40px rgba(13,27,46,0.08);
+    transform: translateY(-3px);
+  }
+
+  .blog-thumb {
+    height: 180px;
+    background: linear-gradient(135deg, #1A3D6E 0%, #2A6DB5 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .blog-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(0,0,0,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .blog-body { padding: 22px; }
+
+  .blog-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--navy-dark);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+
+  .blog-excerpt {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+
+  .blog-meta {
+    font-size: 12px;
+    color: var(--gray-300);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ─── CTA BANNER ─── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(240,165,0,0.1) 0%, transparent 70%);
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy-dark);
+    padding: 64px 5% 32px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 14px;
+    color: rgba(255,255,255,0.45);
+    max-width: 280px;
+  }
+
+  .footer-contact {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-contact a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-contact a:hover { color: var(--gold-light); }
+
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col ul a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul a:hover { color: rgba(255,255,255,0.9); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 54px; height: 54px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 200;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+  }
+
+  .whatsapp-float svg { width: 28px; height: 28px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .uni-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">H</div>
+    <div>
+      <div class="nav-logo-text">Horizon Group</div>
+      <div class="nav-logo-sub">Study Services</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/services">Services</a></li>
+    <li><a href="/universities">Universities</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Based in Ankara, Turkey
+      </div>
+      <h1>Your Gateway to <span>Study & Documents</span> in Turkey</h1>
+      <p class="hero-desc">Certified translation, university admissions, and document legalization — all handled by experts in Ankara.</p>
+      <div class="hero-actions">
+        <a href="/contact" class="btn-primary">Get Free Consultation</a>
+        <a href="/services" class="btn-outline">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Students Helped</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">All</div>
+          <div class="hero-stat-label">Languages</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-icon">📝</div>
+        <div>
+          <div class="hero-card-title">Certified Translation</div>
+          <div class="hero-card-desc">Sworn translations accepted by all official institutions</div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">🎓</div>
+        <div>
+          <div class="hero-card-title">University Admissions</div>
+          <div class="hero-card-desc">Full application support to private universities</div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">📋</div>
+        <div>
+          <div class="hero-card-title">Document Legalization</div>
+          <div class="hero-card-desc">Ministry of Foreign Affairs & embassy legalization</div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">📍</div>
+        <div>
+          <div class="hero-card-title">Meşrutiyet Cad. 10/59</div>
+          <div class="hero-card-desc">Çankaya – Ankara · 0534 215 46 51</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-header">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Our Core Services</h2>
+    <p class="section-sub">Everything you need to study in Turkey or legalize your documents — under one roof.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📝</div>
+      <div class="service-title">Certified Translation</div>
+      <p class="service-desc">We provide sworn and certified translation services to and from all languages, accepted by official authorities and institutions across Turkey and abroad.</p>
+      <a href="/services/certified-translation" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <div class="service-title">University Admissions</div>
+      <p class="service-desc">We assist students in securing admissions to private universities, including application preparation, document submission, and follow-up until acceptance.</p>
+      <a href="/services/university-admissions" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-title">Document Legalization</div>
+      <p class="service-desc">We manage the legalization of certificates and official documents through the Turkish Ministry of Foreign Affairs and relevant embassies.</p>
+      <a href="/services/document-legalization" class="service-link">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITIES -->
+<section class="universities-section">
+  <div class="uni-header-row">
+    <div>
+      <div class="section-label">Partner Universities</div>
+      <h2 class="section-title">Ankara Universities</h2>
+      <p class="section-sub">We help you apply to leading private universities in Ankara with special offers and discounts.</p>
+    </div>
+    <a href="/universities" class="btn-primary" style="white-space: nowrap;">View All Universities</a>
+  </div>
+  <div class="uni-grid">
+    <a href="/universities/ostim-teknik" class="uni-card">
+      <div class="uni-card-img" style="background: linear-gradient(135deg, #0D2B55, #1A5FB4);">
+        <span>OSTİM Teknik</span>
+      </div>
+      <div class="uni-card-body">
+        <div class="uni-name">OSTİM Technical University</div>
+        <div class="uni-location">📍 Ankara, Turkey</div>
+        <div class="uni-tags">
+          <span class="uni-tag">Engineering</span>
+          <span class="uni-tag">Technology</span>
+          <span class="uni-tag">Bachelor's</span>
+        </div>
+      </div>
+    </a>
+    <a href="/universities/lokman-hekim" class="uni-card">
+      <div class="uni-card-img" style="background: linear-gradient(135deg, #0F4C2A, #1A7A45);">
+        <span>Lokman Hekim</span>
+      </div>
+      <div class="uni-card-body">
+        <div class="uni-name">Lokman Hekim University</div>
+        <div class="uni-location">📍 Ankara, Turkey</div>
+        <div class="uni-tags">
+          <span class="uni-tag">Medicine</span>
+          <span class="uni-tag">Health Sciences</span>
+          <span class="uni-tag">Bachelor's</span>
+        </div>
+      </div>
+    </a>
+    <a href="/universities/ankara-medipol" class="uni-card">
+      <div class="uni-card-img" style="background: linear-gradient(135deg, #5C0B1A, #A01830);">
+        <span>Ankara Medipol</span>
+      </div>
+      <div class="uni-card-body">
+        <div class="uni-name">Ankara Medipol University</div>
+        <div class="uni-location">📍 Ankara, Turkey</div>
+        <div class="uni-tags">
+          <span class="uni-tag">Medicine</span>
+          <span class="uni-tag">Dentistry</span>
+          <span class="uni-tag">Bachelor's</span>
+        </div>
+      </div>
+    </a>
+    <a href="/universities/ted" class="uni-card">
+      <div class="uni-card-img" style="background: linear-gradient(135deg, #1A3D6E, #2A6DB5);">
+        <span>TED University</span>
+      </div>
+      <div class="uni-card-body">
+        <div class="uni-name">TED University</div>
+        <div class="uni-location">📍 Ankara, Turkey</div>
+        <div class="uni-tags">
+          <span class="uni-tag">Business</span>
+          <span class="uni-tag">Architecture</span>
+          <span class="uni-tag">Law</span>
+        </div>
+      </div>
+    </a>
+    <a href="/universities/atilim" class="uni-card">
+      <div class="uni-card-img" style="background: linear-gradient(135deg, #2A1A5E, #4A30A0);">
+        <span>Atılım University</span>
+      </div>
+      <div class="uni-card-body">
+        <div class="uni-name">Atılım University</div>
+        <div class="uni-location">📍 Ankara, Turkey</div>
+        <div class="uni-tags">
+          <span class="uni-tag">Engineering</span>
+          <span class="uni-tag">Business</span>
+          <span class="uni-tag">Bachelor's</span>
+        </div>
+      </div>
+    </a>
+    <div class="uni-card" style="background: var(--off-white); border: 2px dashed var(--gray-300); display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px;">
+      <div>
+        <div style="font-size: 30px; margin-bottom: 10px;">🎓</div>
+        <div style="font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 6px;">More Universities</div>
+        <div style="font-size: 13px; color: var(--gray-500);">Contact us for the full list of partner universities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="section-label">Why Choose Us</div>
+  <h2 class="section-title">Trusted by Hundreds of Students</h2>
+  <p class="section-sub" style="color: rgba(255,255,255,0.5);">We've helped students from Palestine, Jordan, Sudan, Saudi Arabia, Lebanon and beyond navigate Turkey's academic and document landscape.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">500+</div>
+      <div class="why-title">Students Enrolled</div>
+      <div class="why-desc">Successfully enrolled students across all partner universities in Ankara.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">All</div>
+      <div class="why-title">Languages Covered</div>
+      <div class="why-desc">Certified sworn translation in any language accepted by official institutions.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">Fast</div>
+      <div class="why-title">Document Processing</div>
+      <div class="why-desc">Quick turnaround on legalization through MFA and all embassies in Ankara.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">Free</div>
+      <div class="why-title">Initial Consultation</div>
+      <div class="why-desc">Book a free consultation in person or by phone — no commitment required.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section">
+  <div class="uni-header-row">
+    <div>
+      <div class="section-label">Latest Articles</div>
+      <h2 class="section-title">From Our Blog</h2>
+      <p class="section-sub">Tips, guides, and news about studying and living in Turkey.</p>
+    </div>
+    <a href="/blog" class="btn-primary">View All Posts</a>
+  </div>
+  <div class="blog-grid">
+    <a href="/blog/how-to-legalize-documents-turkey" class="blog-card">
+      <div class="blog-thumb" style="background: linear-gradient(135deg, #0D2B55, #1A5FB4);">
+        <span class="blog-category">Document Legalization</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-title">How to Legalize Your Documents Through the Turkish Ministry of Foreign Affairs</div>
+        <div class="blog-excerpt">A step-by-step guide to getting your certificates officially legalized in Ankara, including apostille certification.</div>
+        <div class="blog-meta">
+          <span>Horizon Group</span>
+          <span>·</span>
+          <span>5 min read</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/private-universities-ankara-guide" class="blog-card">
+      <div class="blog-thumb" style="background: linear-gradient(135deg, #0F4C2A, #1A7A45);">
+        <span class="blog-category">University Admissions</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-title">Top Private Universities in Ankara for International Students in 2025</div>
+        <div class="blog-excerpt">Compare programs, tuition fees, and language options at Ankara's leading private universities.</div>
+        <div class="blog-meta">
+          <span>Horizon Group</span>
+          <span>·</span>
+          <span>7 min read</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/certified-translation-turkey" class="blog-card">
+      <div class="blog-thumb" style="background: linear-gradient(135deg, #2A1A5E, #4A30A0);">
+        <span class="blog-category">Translation Tips</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-title">What Is a Certified Translation and Why Do You Need One in Turkey?</div>
+        <div class="blog-excerpt">Everything you need to know about sworn and certified translations accepted by Turkish authorities.</div>
+        <div class="blog-meta">
+          <span>Horizon Group</span>
+          <span>·</span>
+          <span>4 min read</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-section">
+  <h2>Ready to Start Your Journey?</h2>
+  <p>Visit our office in Çankaya, Ankara or reach us by phone — we're here to help.</p>
+  <div class="cta-actions">
+    <a href="/contact" class="btn-primary">Book Free Consultation</a>
+    <a href="tel:+905342154651" class="btn-outline" style="color: white; border-color: rgba(255,255,255,0.4);">📞 0534 215 46 51</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom: 0;">
+        <div class="nav-logo-icon">H</div>
+        <div>
+          <div class="nav-logo-text">Horizon Group</div>
+          <div class="nav-logo-sub">Study Services</div>
+        </div>
+      </div>
+      <p>Your trusted partner for certified translation, university admissions, and document legalization in Ankara, Turkey.</p>
+      <div class="footer-contact">
+        <a href="tel:+905342154651">📞 0534 215 46 51</a>
+        <a href="tel:+905398870830">📞 0539 887 08 30</a>
+        <a href="#">📍 Meşrutiyet Cad. 10/59, Çankaya – Ankara</a>
+        <a href="https://www.horizonstudy.org">🌐 www.horizonstudy.org</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services/certified-translation">Certified Translation</a></li>
+        <li><a href="/services/university-admissions">University Admissions</a></li>
+        <li><a href="/services/document-legalization">Document Legalization</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Universities</h4>
+      <ul>
+        <li><a href="/universities/ostim-teknik">OSTİM Teknik</a></li>
+        <li><a href="/universities/lokman-hekim">Lokman Hekim</a></li>
+        <li><a href="/universities/ankara-medipol">Ankara Medipol</a></li>
+        <li><a href="/universities/ted">TED University</a></li>
+        <li><a href="/universities/atilim">Atılım University</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Horizon Group. All rights reserved.</span>
+    <span>Meşrutiyet Mah, Çankaya – Ankara, Turkey</span>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/905342154651" class="whatsapp-float" target="_blank">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+</body>
+</html>

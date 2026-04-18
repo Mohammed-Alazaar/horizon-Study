@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0D2B55;
+  --navy-dark: #071829;
+  --blue: #1A5FB4;
+  --blue-light: #3A82D8;
+  --gold: #F0A500;
+  --gold-light: #FBBF24;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-dm-sans), sans-serif;
+  color: #0D1B2E;
+  background: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
