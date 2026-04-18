@@ -20,6 +20,12 @@ export default function Navbar() {
               Universities
             </Link>
             <Link
+              href="/admin"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Admin
+            </Link>
+            <Link
               href="/universities/add"
               className="text-sm font-medium bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
