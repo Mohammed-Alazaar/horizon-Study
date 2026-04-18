@@ -1,12 +1,6 @@
 import Link from "next/link";
-
-const universities = [
-  { href: "/universities/ostim-teknik", label: "OSTİM Teknik" },
-  { href: "/universities/lokman-hekim", label: "Lokman Hekim" },
-  { href: "/universities/ankara-medipol", label: "Ankara Medipol" },
-  { href: "/universities/ted", label: "TED University" },
-  { href: "/universities/atilim", label: "Atılım University" },
-];
+import { connectDB } from "@/lib/mongodb";
+import University from "@/models/University";
 
 const services = [
   { href: "/services/certified-translation", label: "Certified Translation" },
@@ -22,7 +16,23 @@ const company = [
   { href: "/terms", label: "Terms" },
 ];
 
-export default function Footer() {
+async function getFooterUniversities(): Promise<{ href: string; label: string }[]> {
+  try {
+    await connectDB();
+    const unis = await University.find({ featured: true })
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .select("name slug")
+      .lean<{ name: string; slug: string }[]>();
+    return unis.map((u) => ({ href: `/universities/${u.slug}`, label: u.name }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function Footer() {
+  const universities = await getFooterUniversities();
+
   return (
     <footer className="bg-navy-dark py-16 px-[5%] pb-8">
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
@@ -52,7 +62,7 @@ export default function Footer() {
         </div>
 
         <FooterCol title="Services" links={services} />
-        <FooterCol title="Universities" links={universities} />
+        {universities.length > 0 && <FooterCol title="Universities" links={universities} />}
         <FooterCol title="Company" links={company} />
       </div>
 
