@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       if (!info["Name"]) return NextResponse.json({ error: "Info sheet is missing the Name field" }, { status: 400 });
 
       // Also read separate department sheets (they may include Description)
-      function parseDeptSheet(sheetName: string) {
+      const parseDeptSheet = (sheetName: string) => {
         const sheet = wb.Sheets[sheetName];
         if (!sheet) return [];
         return (XLSX.utils.sheet_to_json(sheet) as any[])
@@ -72,17 +72,16 @@ export async function POST(req: NextRequest) {
             description: String(r["Description"] ?? "").trim(),
           }))
           .filter((r) => r.department && !r.department.startsWith("e.g."));
-      }
+      };
 
       // Merge inline (col C-F) and separate sheet departments; separate sheets take precedence (have Description)
-      function mergeDepts(sheetName: string, degreeLabel: string) {
+      const mergeDepts = (sheetName: string, degreeLabel: string) => {
         const fromSheet = parseDeptSheet(sheetName);
         if (fromSheet.length > 0) return fromSheet;
-        // Fall back to inline entries for this degree
         return inlineDepts
           .filter((d) => d.degree.toLowerCase().startsWith(degreeLabel.toLowerCase()))
           .map((d) => ({ department: d.department, language: d.language, tuitionFee: d.tuitionFee, description: "" }));
-      }
+      };
 
       const parsed = {
         name:              info["Name"],
