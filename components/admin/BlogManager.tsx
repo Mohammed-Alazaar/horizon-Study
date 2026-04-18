@@ -185,7 +185,7 @@ export default function BlogManager() {
                 <label className="block text-xs font-medium text-gray-horizon-700 mb-1">Content</label>
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                  onInit={(_evt, editor) => { editorRef.current = editor; }}
+                  onInit={(_evt: any, editor: any) => { editorRef.current = editor; }}
                   initialValue={editing.content}
                   init={{
                     height: 420,
