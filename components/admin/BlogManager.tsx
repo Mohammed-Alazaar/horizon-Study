@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import type { Editor as TinyMCEEditor } from "tinymce";
 import ImageUpload from "./ImageUpload";
 
 interface BlogPost {
@@ -36,7 +35,7 @@ export default function BlogManager() {
   const [error, setError] = useState("");
   const [editing, setEditing] = useState<BlogPost | null>(null);
   const [isNew, setIsNew] = useState(false);
-  const editorRef = useRef<TinyMCEEditor | null>(null);
+  const editorRef = useRef<any>(null);
 
   useEffect(() => { fetchPosts(); }, []);
 
