@@ -46,7 +46,7 @@ export default async function BlogSection() {
             className="bg-white rounded-2xl overflow-hidden border border-gray-horizon-100 hover:shadow-[0_12px_40px_rgba(13,27,46,0.08)] hover:-translate-y-[3px] transition-all block no-underline"
           >
             <div
-              className="h-[180px] flex items-end p-4"
+              className="h-[180px] flex items-end p-4 relative"
               style={{ background: post.coverColor ?? post.coverUrl ? undefined : "linear-gradient(135deg,#1A3D6E,#2A6DB5)" }}
             >
               {post.coverUrl && (
