@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import type { Editor as TinyMCEEditor } from "tinymce";
 import ImageUpload from "./ImageUpload";
 
 interface BlogPost {
@@ -34,6 +36,7 @@ export default function BlogManager() {
   const [error, setError] = useState("");
   const [editing, setEditing] = useState<BlogPost | null>(null);
   const [isNew, setIsNew] = useState(false);
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
   useEffect(() => { fetchPosts(); }, []);
 
@@ -54,12 +57,13 @@ export default function BlogManager() {
     setSaving(true);
     setError("");
     try {
+      const content = editorRef.current ? editorRef.current.getContent() : editing.content;
       const url = isNew ? "/api/blog" : `/api/blog/${editing._id}`;
       const method = isNew ? "POST" : "PUT";
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
+        body: JSON.stringify({ ...editing, content }),
       });
       if (!res.ok) {
         const d = await res.json();
@@ -154,7 +158,7 @@ export default function BlogManager() {
       {/* Editor modal */}
       {editing && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center overflow-auto py-6 px-4">
-          <div className="bg-white rounded-2xl p-8 w-full max-w-2xl">
+          <div className="bg-white rounded-2xl p-8 w-full max-w-4xl">
             <h2 className="font-display text-xl font-bold text-navy-dark mb-6">{isNew ? "New Post" : "Edit Post"}</h2>
 
             <div className="flex flex-col gap-4">
@@ -176,12 +180,34 @@ export default function BlogManager() {
                 <textarea rows={2} value={editing.excerpt} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })}
                   className="w-full border border-gray-horizon-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue resize-none" />
               </div>
+
+              {/* TinyMCE rich text editor */}
               <div>
-                <label className="block text-xs font-medium text-gray-horizon-700 mb-1">Content (HTML)</label>
-                <textarea rows={10} value={editing.content} onChange={(e) => setEditing({ ...editing, content: e.target.value })}
-                  placeholder="<h2>Heading</h2><p>Paragraph...</p>"
-                  className="w-full border border-gray-horizon-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue resize-none font-mono" />
+                <label className="block text-xs font-medium text-gray-horizon-700 mb-1">Content</label>
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                  onInit={(_evt, editor) => { editorRef.current = editor; }}
+                  initialValue={editing.content}
+                  init={{
+                    height: 420,
+                    menubar: false,
+                    plugins: [
+                      "advlist", "autolink", "lists", "link", "image", "charmap",
+                      "preview", "anchor", "searchreplace", "visualblocks", "code",
+                      "fullscreen", "insertdatetime", "media", "table", "help", "wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | blocks | bold italic underline | " +
+                      "alignleft aligncenter alignright alignjustify | " +
+                      "bullist numlist outdent indent | link image | " +
+                      "removeformat code | help",
+                    content_style: "body { font-family: DM Sans, sans-serif; font-size: 15px; color: #1a1a2e; }",
+                    branding: false,
+                    resize: true,
+                  }}
+                />
               </div>
+
               <Field label="Cover Color (CSS gradient)" value={editing.coverColor} onChange={(v) => setEditing({ ...editing, coverColor: v })} />
               <div>
                 <label className="block text-xs font-medium text-gray-horizon-700 mb-1">Cover Image</label>

@@ -24,8 +24,10 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
     const body = await req.json();
-    const slug = body.slug || slugify(body.title);
-    const post = await BlogPost.create({ ...body, slug });
+    const { _id, createdAt, updatedAt, ...data } = body;
+    void _id; void createdAt; void updatedAt;
+    const slug = data.slug || slugify(data.title);
+    const post = await BlogPost.create({ ...data, slug });
     return NextResponse.json(post, { status: 201 });
   } catch (err: any) {
     console.error("[POST /api/blog]", err);
